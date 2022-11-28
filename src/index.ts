@@ -9,8 +9,8 @@ async function start() {
     console.error({ ok: 0, error: "source not found" });
     return;
   }
-
-  s.writeMDFile("temp/asdad.md");
+  console.log(s.metadata);
+  s.writeMDFile(`temp/${s.metadata.title.replace(" ", "-")}.md`);
 }
 start();
 

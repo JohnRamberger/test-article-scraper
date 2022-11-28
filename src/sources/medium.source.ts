@@ -1,4 +1,3 @@
-import { Markdown } from "../Markdown";
 import { Metadata } from "./classes/Metadata.class";
 import { Source } from "./classes/source.class";
 

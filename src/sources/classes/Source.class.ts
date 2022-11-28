@@ -1,5 +1,4 @@
 import { NodeHtmlMarkdown } from "node-html-markdown";
-import { Markdown } from "../../Markdown";
 import { Puppet } from "../../puppet";
 import { Medium } from "../medium.source";
 import { Metadata } from "./Metadata.class";
@@ -57,14 +56,9 @@ export class Source {
     this.metadata.author = doc
       .querySelector("meta[name=author]")
       .getAttribute("content");
-    this.metadata.tags = [];
     this.metadata.description = doc
       .querySelector("meta[name='description']")
       .getAttribute("content");
-
-    // this.metadata.image = doc
-    //   .querySelector("meta[property='og:image']")
-    //   .getAttribute("content");
   }
 
   /**
@@ -165,7 +159,7 @@ export class Source {
     const fs = require("fs");
     fs.writeFile(path, md, function (err) {
       if (err) return console.log(err);
-      console.log("file written!");
+      console.log("md file written!");
     });
   }
 
@@ -177,7 +171,7 @@ export class Source {
     const fs = require("fs");
     fs.writeFile(path, this.stringBody, function (err) {
       if (err) return console.log(err);
-      console.log("file written!");
+      console.log("html file written!");
     });
   }
 }
