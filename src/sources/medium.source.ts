@@ -1,5 +1,4 @@
-import { Metadata } from "./classes/Metadata.class";
-import { Source } from "./classes/source.class";
+import { Source } from "./";
 
 export class Medium extends Source {
   constructor(url: string) {

@@ -1,7 +1,8 @@
 import { NodeHtmlMarkdown } from "node-html-markdown";
 import { Puppet } from "../../puppet";
-import { Medium } from "../medium.source";
-import { Metadata } from "./Metadata.class";
+import { Dev } from "../";
+import { Medium } from "../";
+import { Metadata } from "../classes/metadata.class";
 
 export class Source {
   /**
@@ -55,20 +56,28 @@ export class Source {
     if (!this.metadata.title)
       this.metadata.title = doc
         .querySelector("meta[name=title]")
-        .getAttribute("content");
+        ?.getAttribute("content");
 
     if (!this.metadata.author)
       this.metadata.author = doc
         .querySelector("meta[name=author]")
-        .getAttribute("content");
+        ?.getAttribute("content");
 
     if (!this.metadata.description)
       this.metadata.description = doc
         .querySelector("meta[name='description']")
-        .getAttribute("content");
+        ?.getAttribute("content");
 
     if (this.metadata.title) {
-      this.metadata.titleNoSpace = this.metadata.title.replace(/\s/g, "-");
+      // set titleSafe to the title with only lowercase letters and spaces replaced with dashes
+      this.metadata.titleSafe = this.metadata.title;
+      this.metadata.titleSafe = this.metadata.titleSafe.toLowerCase();
+      this.metadata.titleSafe = this.metadata.titleSafe.replace(/ /g, "-");
+      // remove all non alphanumeric characters
+      this.metadata.titleSafe = this.metadata.titleSafe.replace(
+        /[^a-z0-9-]/g,
+        ""
+      );
     }
   }
 
@@ -94,7 +103,7 @@ export class Source {
   static getBaseUrl(url: string): string {
     // get the base url from the url
     // https://medium.com/illumination/how-to-create-a-telegram-bot-using-python-making-300-per-month-cf80d0693bb5
-    let baseurl;
+    let baseurl: string;
     if (url.includes("//")) {
       baseurl = url.split("/")[2];
     } else {
@@ -123,6 +132,11 @@ export class Source {
           let s = new Medium(url);
           await s.init();
           resolve(s);
+        case "dev.to":
+          console.log("source found!");
+          let s2 = new Dev(url);
+          await s2.init();
+          resolve(s2);
         default:
           resolve(false);
       }
