@@ -1,3 +1,4 @@
+import { marked } from "marked";
 import { Source } from "./sources";
 
 async function start() {
@@ -8,27 +9,16 @@ async function start() {
     console.error({ ok: 0, error: "source not found" });
     return;
   }
-  // console.log(s.getArticleContent());
-  s.writeHtmlFile("temp/test.html");
+
+  s.writeMDFile("temp/asdad.md");
 }
 start();
-// import * as puppeteer from "puppeteer";
 
-// (async () => {
-//   try {
-//     console.log("Starting browser");
-//     const browser = await puppeteer.launch();
-//     const page = await browser.newPage();
-//     console.log("Going to url");
-//     await page.goto(
-//       "https://medium.com/illumination/how-to-create-a-telegram-bot-using-python-making-300-per-month-cf80d0693bb5"
-//     );
-//     console.log("saving page");
-//     await page.pdf({ path: "temp/google.pdf" });
+async function mdToHtml() {
+  let fs = require("fs");
+  let md = fs.readFileSync("temp/test.md", "utf8");
+  let html = marked.parse(md);
+  fs.writeFileSync("temp/test.html", html);
+}
 
-//     await browser.close();
-//     console.log("Done!");
-//   } catch (err) {
-//     console.error(err);
-//   }
-// })();
+// mdToHtml();

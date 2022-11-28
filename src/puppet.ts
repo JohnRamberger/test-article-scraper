@@ -19,7 +19,10 @@ export class Puppet {
         await page.waitForNetworkIdle();
       }
 
-      let str = await page.evaluate(() => document.body.innerHTML);
+      // let body = await page.evaluate(() => document.body.innerHTML);
+      // let head = await page.evaluate(() => document.head.innerHTML);
+      let str = await page.content();
+      // console.log(str);
       await browser.close();
 
       let dom = new JSDOM(str);

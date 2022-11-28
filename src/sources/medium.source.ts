@@ -1,4 +1,5 @@
 import { Markdown } from "../Markdown";
+import { Metadata } from "./classes/Metadata.class";
 import { Source } from "./classes/source.class";
 
 export class Medium extends Source {
@@ -6,15 +7,22 @@ export class Medium extends Source {
     super(url);
   }
 
-  getArticleContent() {
+  initArticleContent() {
     let doc = this.htmlDoc;
-    let article = doc.querySelector(
-      "#root > div > div.y.c > div > div > main > div > div.we.wf.wg.wh.wi.y > div:nth-child(1) > div > article"
-    );
-    // console.log(article);
-    // let content = article.querySelector("section");
-    // let md = Markdown.getMarkdown(article.innerHTML);
-    // Markdown.writeMDFile(md, "temp/test.md");
-    // return md;
+    let article = doc.querySelector("article section");
+    this.content = article.innerHTML;
+  }
+
+  initMetadata() {
+    super.initMetadata();
+    this.metadata.title = this.htmlDoc
+      .querySelector("meta[property='og:title']")
+      .getAttribute("content");
+    this.metadata.date = this.htmlDoc
+      .querySelector(`meta[property='article:published_time']`)
+      .getAttribute("content");
+    this.metadata.image = this.htmlDoc
+      .querySelector("meta[property='og:image']")
+      .getAttribute("content");
   }
 }
