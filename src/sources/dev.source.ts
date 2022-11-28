@@ -1,5 +1,8 @@
 import { Source } from "./";
 
+/**
+ * The source dev.to
+ */
 export class Dev extends Source {
   constructor(url: string) {
     super(url);

@@ -3,7 +3,7 @@ import { Source } from "./sources";
 
 async function start() {
   let url =
-    "https://dev.to/maximecheramy/diy-ive-built-a-music-box-for-the-2nd-x-mas-of-my-son-j03";
+    "https://www.forbes.com/sites/tracybrower/2022/11/27/is-work-damaging-your-brain-health-5-strategies-to-improve-it/?sh=3df3bed014ed";
   let s = await Source.getSource(url);
   if (!s) {
     console.error({ ok: 0, error: "source not found" });
@@ -11,6 +11,7 @@ async function start() {
   }
   console.log(s.metadata);
   s.writeMDFile(`temp/${s.metadata.titleSafe}.md`);
+  s.writeHtmlFile(`temp/${s.metadata.titleSafe}.html`);
 }
 start();
 

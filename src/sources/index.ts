@@ -2,3 +2,4 @@
 export { Source } from "./classes/source.class";
 export { Dev } from "./dev.source";
 export { Medium } from "./medium.source";
+export { Forbes } from "./forbes.source";

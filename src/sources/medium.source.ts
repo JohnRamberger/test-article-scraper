@@ -1,5 +1,8 @@
 import { Source } from "./";
 
+/**
+ * The source medium.com
+ */
 export class Medium extends Source {
   constructor(url: string) {
     super(url);

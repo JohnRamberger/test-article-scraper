@@ -2,8 +2,12 @@ import { NodeHtmlMarkdown } from "node-html-markdown";
 import { Puppet } from "../../puppet";
 import { Dev } from "../";
 import { Medium } from "../";
+import { Forbes } from "../";
 import { Metadata } from "../classes/metadata.class";
 
+/**
+ * The source class
+ */
 export class Source {
   /**
    * The url of the source
@@ -55,7 +59,7 @@ export class Source {
     let doc = this.htmlDoc;
     if (!this.metadata.title)
       this.metadata.title = doc
-        .querySelector("meta[name=title]")
+        .querySelector("meta[property='og:title']")
         ?.getAttribute("content");
 
     if (!this.metadata.author)
@@ -90,6 +94,16 @@ export class Source {
     let body = await Puppet.getHtml(this);
     this.stringBody = body[0];
     this.htmlDoc = body[1];
+
+    // remove all scripts from the html
+    this.htmlDoc.querySelectorAll("script").forEach((s) => {
+      s.remove();
+    });
+    // remove all styles from the html
+    this.htmlDoc.querySelectorAll("style").forEach((s) => {
+      s.remove();
+    });
+
     console.log("done grabbing!");
     this.initMetadata();
     this.initArticleContent();
@@ -128,17 +142,23 @@ export class Source {
       let baseurl = this.getBaseUrl(url);
       switch (baseurl) {
         case "medium.com":
-          console.log("source found!");
           let s = new Medium(url);
           await s.init();
           resolve(s);
+          break;
         case "dev.to":
-          console.log("source found!");
           let s2 = new Dev(url);
           await s2.init();
           resolve(s2);
+          break;
+        case "www.forbes.com":
+          let s3 = new Forbes(url);
+          await s3.init();
+          resolve(s3);
+          break;
         default:
           resolve(false);
+          break;
       }
     });
   }
