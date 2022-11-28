@@ -59,6 +59,10 @@ export class Source {
     this.metadata.description = doc
       .querySelector("meta[name='description']")
       .getAttribute("content");
+
+    if (this.metadata.title) {
+      this.metadata.titleNoSpace = this.metadata.title.replace(/\s/g, "");
+    }
   }
 
   /**

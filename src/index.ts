@@ -2,15 +2,17 @@ import { marked } from "marked";
 import { Source } from "./sources";
 
 async function start() {
+  // let url =
+  //   "https://medium.com/illumination/how-to-create-a-telegram-bot-using-python-making-300-per-month-cf80d0693bb5";
   let url =
-    "https://medium.com/illumination/how-to-create-a-telegram-bot-using-python-making-300-per-month-cf80d0693bb5";
+    "https://medium.com/illumination/the-world-is-not-getting-enough-sleep-4c629813c6d6";
   let s = await Source.getSource(url);
   if (!s) {
     console.error({ ok: 0, error: "source not found" });
     return;
   }
   console.log(s.metadata);
-  s.writeMDFile(`temp/${s.metadata.title.replace(" ", "-")}.md`);
+  s.writeMDFile(`temp/${s.metadata.titleNoSpace}.md`);
 }
 start();
 

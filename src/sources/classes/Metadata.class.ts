@@ -2,6 +2,7 @@ export class Metadata {
   url: string;
   baseurl: string;
   title: string;
+  titleNoSpace: string;
   author: string;
   date: string;
   tags?: string[];
