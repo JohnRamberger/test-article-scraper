@@ -13,7 +13,6 @@ export class Medium extends Source {
   }
 
   initMetadata() {
-    super.initMetadata();
     this.metadata.title = this.htmlDoc
       .querySelector("meta[property='og:title']")
       .getAttribute("content");
@@ -23,5 +22,6 @@ export class Medium extends Source {
     this.metadata.image = this.htmlDoc
       .querySelector("meta[property='og:image']")
       .getAttribute("content");
+    super.initMetadata();
   }
 }

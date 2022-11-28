@@ -35,6 +35,7 @@ export class Source {
   constructor(url: string, waitForNetworkIdle: boolean = true) {
     this.url = url;
     this.waitForNetworkIdle = waitForNetworkIdle;
+    this.metadata = new Metadata();
   }
 
   /**
@@ -45,23 +46,29 @@ export class Source {
    * Initializes the metadata of the source
    */
   protected initMetadata() {
-    this.metadata = new Metadata();
+    if (!this.metadata.url) this.metadata.url = this.url;
+    if (!this.metadata.baseurl)
+      this.metadata.baseurl = Source.getBaseUrl(this.url);
 
-    this.metadata.url = this.url;
-    this.metadata.baseurl = Source.getBaseUrl(this.url);
+    // get stuff from meta tags in head
     let doc = this.htmlDoc;
-    this.metadata.title = doc
-      .querySelector("meta[name=title]")
-      .getAttribute("content");
-    this.metadata.author = doc
-      .querySelector("meta[name=author]")
-      .getAttribute("content");
-    this.metadata.description = doc
-      .querySelector("meta[name='description']")
-      .getAttribute("content");
+    if (!this.metadata.title)
+      this.metadata.title = doc
+        .querySelector("meta[name=title]")
+        .getAttribute("content");
+
+    if (!this.metadata.author)
+      this.metadata.author = doc
+        .querySelector("meta[name=author]")
+        .getAttribute("content");
+
+    if (!this.metadata.description)
+      this.metadata.description = doc
+        .querySelector("meta[name='description']")
+        .getAttribute("content");
 
     if (this.metadata.title) {
-      this.metadata.titleNoSpace = this.metadata.title.replace(/\s/g, "");
+      this.metadata.titleNoSpace = this.metadata.title.replace(/\s/g, "-");
     }
   }
 
