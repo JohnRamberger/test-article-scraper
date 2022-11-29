@@ -1,3 +1,4 @@
+import { SourceJob } from "./SourceJob.class";
 import { SourceManager } from "./SourceManager.class";
 
 var cron = require("node-cron");
@@ -19,9 +20,14 @@ export class CronManager {
     cron.schedule(this.EVERY_MINUTE, () => {
       try {
         // do stuff
+        console.log("running a task every minute");
       } catch (error) {
         //do something with error (ideally log)
       }
     });
+
+    //test SourceJob
+    let job = new SourceJob("https://www.google.com");
+    console.log(job);
   }
 }
