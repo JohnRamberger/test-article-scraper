@@ -6,7 +6,10 @@
   "scripts": {
     "watch": "nodemon",
     "start": "npx ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:start": "npx ts-node src/test.ts",
+    "pm2:watch": "pm2 start src/pm2.ts --watch",
+    "pm2": "pm2 start src/pm2.ts"
   },
   "repository": {
     "type": "git",
@@ -27,7 +30,9 @@
     "@types/marked": "^4.0.7",
     "jsdom": "^20.0.3",
     "marked": "^4.2.3",
+    "node-cron": "^3.0.2",
     "node-html-markdown": "^1.2.2",
+    "pm2": "^5.2.2",
     "puppeteer": "^19.3.0"
   }
 }

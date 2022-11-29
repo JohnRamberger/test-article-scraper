@@ -1,5 +1,5 @@
 import { NodeHtmlMarkdown } from "node-html-markdown";
-import { Puppet } from "../../puppet";
+import { Puppet } from "../../Puppet.class";
 import { Dev } from "../";
 import { Medium } from "../";
 import { Forbes } from "../";
