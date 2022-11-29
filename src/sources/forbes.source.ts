@@ -5,8 +5,7 @@ import { Source } from "./";
  */
 export class Forbes extends Source {
   constructor(url: string) {
-    super(url);
-    this.waitForNetworkIdle = false;
+    super(url, false);
   }
   initArticleContent() {
     let doc = this.htmlDoc;
