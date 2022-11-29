@@ -2,7 +2,7 @@ import * as puppeteer from "puppeteer";
 
 import { JSDOM } from "jsdom";
 
-import { Source } from "./sources";
+import { Source } from "../sources";
 
 //manage all puppeteer instances
 export class Puppet {
@@ -14,7 +14,7 @@ export class Puppet {
       page.setUserAgent(
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
       );
-      await page.goto(source.getUrl());
+      await page.goto(source.url);
       if (source.waitForNetworkIdle) {
         await page.waitForNetworkIdle();
       }

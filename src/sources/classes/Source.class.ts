@@ -1,5 +1,5 @@
 import { NodeHtmlMarkdown } from "node-html-markdown";
-import { Puppet } from "../../Puppet.class";
+import { Puppet } from "../../classes/Puppet.class";
 import { Dev } from "../";
 import { Medium } from "../";
 import { Forbes } from "../";
@@ -218,5 +218,9 @@ export class Source {
       if (err) return console.log(err);
       console.log("html file written!");
     });
+  }
+
+  get waitForNetworkIdle(): boolean {
+    return this._waitForNetworkIdle;
   }
 }
