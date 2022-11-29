@@ -1,14 +1,17 @@
-export class Queue {
-  elements: any[];
-  head: any;
-  tail: any;
+/**
+ * A queue of items.
+ */
+export class Queue<T> {
+  protected elements: T[];
+  protected head: number;
+  protected tail: number;
 
   constructor() {
     this.elements = [];
     this.head = 0;
     this.tail = 0;
   }
-  enqueue(element) {
+  enqueue(element: T) {
     this.elements[this.tail] = element;
     this.tail++;
   }
@@ -21,11 +24,14 @@ export class Queue {
   peek() {
     return this.elements[this.head];
   }
-  get length() {
+  get size() {
     return this.tail - this.head;
   }
   get isEmpty() {
-    return this.length === 0;
+    return this.size === 0;
+  }
+  get list() {
+    return this.elements;
   }
 }
 
