@@ -11,15 +11,12 @@ export class CronManager {
    * Schedules all of the cron jobs.
    */
   static start() {
+    // initialize the SourceManager
     SourceManager.init();
-    SourceManager.queue.enqueue(1);
-    SourceManager.queue.enqueue(2);
-    SourceManager.queue.enqueue(3);
-    SourceManager.queue.enqueue(4);
-    // let i = 0;
+    
+    // schedule the cron jobs
     cron.schedule(this.EVERY_MINUTE, () => {
-      console.log(SourceManager.queue.dequeue());
-      // i++;
+      console.log("running a task every minute");
     });
   }
 }
