@@ -12,25 +12,25 @@ export class Source {
   /**
    * The url of the source
    */
-  protected url: string;
+  protected _url: string;
   /**
    * The html document of the source
    */
-  protected htmlDoc: Document;
+  protected _htmlDoc: Document;
   /**
    * The string of the html document
    */
-  protected stringBody: string;
+  protected _stringBody: string;
 
   /**
    * The content of an article
    */
-  protected content: string;
+  content: string;
 
   /**
    * whether to wait for network idle before grabbing the html
    */
-  waitForNetworkIdle: boolean;
+  protected _waitForNetworkIdle: boolean;
 
   /**
    * The metadata of the source
@@ -38,8 +38,8 @@ export class Source {
   metadata: Metadata;
 
   constructor(url: string, waitForNetworkIdle: boolean = true) {
-    this.url = url;
-    this.waitForNetworkIdle = waitForNetworkIdle;
+    this._url = url;
+    this._waitForNetworkIdle = waitForNetworkIdle;
     this.metadata = new Metadata();
   }
 
@@ -51,12 +51,12 @@ export class Source {
    * Initializes the metadata of the source
    */
   protected initMetadata() {
-    if (!this.metadata.url) this.metadata.url = this.url;
+    if (!this.metadata.url) this.metadata.url = this._url;
     if (!this.metadata.baseurl)
-      this.metadata.baseurl = Source.getBaseUrl(this.url);
+      this.metadata.baseurl = Source.getBaseUrl(this._url);
 
     // get stuff from meta tags in head
-    let doc = this.htmlDoc;
+    let doc = this._htmlDoc;
     if (!this.metadata.title)
       this.metadata.title = doc
         .querySelector("meta[property='og:title']")
@@ -92,15 +92,15 @@ export class Source {
     // init the source
     console.log("grabbing...");
     let body = await Puppet.getHtml(this);
-    this.stringBody = body[0];
-    this.htmlDoc = body[1];
+    this._stringBody = body[0];
+    this._htmlDoc = body[1];
 
     // remove all scripts from the html
-    this.htmlDoc.querySelectorAll("script").forEach((s) => {
+    this._htmlDoc.querySelectorAll("script").forEach((s) => {
       s.remove();
     });
     // remove all styles from the html
-    this.htmlDoc.querySelectorAll("style").forEach((s) => {
+    this._htmlDoc.querySelectorAll("style").forEach((s) => {
       s.remove();
     });
 
@@ -167,24 +167,24 @@ export class Source {
    * Gets the url of the source
    * @returns the url of the source
    */
-  getUrl(): string {
-    return this.url;
+  get url(): string {
+    return this._url;
   }
 
   /**
    * Gets the html document of the source
    * @returns the html document of the source
    */
-  getHtmlDoc(): Document {
-    return this.htmlDoc;
+  get htmlDoc(): Document {
+    return this._htmlDoc;
   }
 
   /**
    * Gets the string of the html document
    * @returns the string html of the source
    */
-  getStringBody(): string {
-    return this.stringBody;
+  get stringBody(): string {
+    return this._stringBody;
   }
 
   /**
@@ -214,7 +214,7 @@ export class Source {
    */
   writeHtmlFile(path: string) {
     const fs = require("fs");
-    fs.writeFile(path, this.stringBody, function (err) {
+    fs.writeFile(path, this._stringBody, function (err) {
       if (err) return console.log(err);
       console.log("html file written!");
     });
