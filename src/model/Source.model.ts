@@ -1,9 +1,9 @@
 import { NodeHtmlMarkdown } from "node-html-markdown";
-import { Puppet } from "../../classes/Puppet.class";
-import { Dev } from "../";
-import { Medium } from "../";
-import { Forbes } from "../";
-import { Metadata } from "../classes/metadata.class";
+import { Puppet } from "./Puppet.model";
+import { Dev } from "../sources";
+import { Medium } from "../sources";
+import { Forbes } from "../sources";
+import { Metadata } from "./Metadata.model";
 
 /**
  * The source class

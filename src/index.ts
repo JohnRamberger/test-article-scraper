@@ -1,4 +1,4 @@
-import { CronManager } from "./classes/CronManager.class";
+import { CronManager } from "./model/CronManager.model";
 
 // Start up the cron manager :D
 CronManager.start();

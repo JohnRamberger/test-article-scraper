@@ -1,4 +1,4 @@
-import { Queue } from "./Queue.class";
+import { Queue } from "./Queue.model";
 
 export class SourceManager {
   /**

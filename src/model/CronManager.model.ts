@@ -1,5 +1,5 @@
-import { SourceJob } from "./SourceJob.class";
-import { SourceManager } from "./SourceManager.class";
+import { SourceJob } from "./SourceJob.model";
+import { SourceManager } from "./SourceManager.model";
 
 var cron = require("node-cron");
 
