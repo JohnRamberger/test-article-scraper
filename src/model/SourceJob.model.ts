@@ -10,6 +10,12 @@ export enum JobStatus {
   UNKNOWN = "UNKNOWN",
 }
 
+export enum JobType {
+  CATALOG = "CATALOG",
+  ARTICLE = "ARTICLE",
+  UNKNOWN = "UNKNOWN",
+}
+
 /**
  * A job to be processed by the SourceManager.
  */
@@ -36,11 +42,25 @@ export class SourceJob {
    * @see JobStatus.UNKNOWN
    */
   protected _status: JobStatus;
+
   /**
    * The status of the job.
    */
   get status(): JobStatus {
     return this._status;
+  }
+
+  /**
+   * The type of the job.
+   * @see JobType
+   * @see JobType.CATALOG
+   * @see JobType.ARTICLE
+   * @see JobType.UNKNOWN
+   */
+  protected _type: JobType;
+
+  get type() {
+    return this._type;
   }
 
   /**
