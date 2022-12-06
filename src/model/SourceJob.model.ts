@@ -10,6 +10,9 @@ export enum JobStatus {
   UNKNOWN = "UNKNOWN",
 }
 
+/**
+ * A job to be processed by the SourceManager.
+ */
 export class SourceJob {
   /**
    * The id of the job.
@@ -51,6 +54,10 @@ export class SourceJob {
     return this._url;
   }
 
+  /**
+   * Creates a new SourceJob.
+   * @param url The url of the source.
+   */
   constructor(url: string) {
     this._id = uuid();
     this._status = JobStatus.PENDING;
