@@ -26,7 +26,9 @@ export class CronManager {
         // do stuff
         console.log("running a task every minute");
         // create a new test job
-        let job = new SourceJob("https://www.google.com");
+        let job = new SourceJob(
+          "https://medium.com/dev-genius/how-to-implement-infinite-scroll-with-apollo-clients-fetch-more-and-react-376d6ad8bba6"
+        );
         console.log(job);
       } catch (error) {
         //do something with error (ideally log)
