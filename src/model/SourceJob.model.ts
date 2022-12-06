@@ -79,6 +79,15 @@ export class SourceJob {
    * @param url The url of the source.
    */
   constructor(url: string) {
+    // verify the url is not null or empty
+    if (!url || url.length === 0) {
+      throw new Error("url cannot be null or empty");
+    }
+    // verify that the url is a valid url
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      throw new Error("url must start with http:// or https://");
+    }
+    // set the properties
     this._id = uuid();
     this._status = JobStatus.PENDING;
     this._type = JobType.UNKNOWN;
