@@ -26,7 +26,7 @@ export class CronManager {
         // do stuff
         console.log("running a task every minute");
         // create a new test job
-        let job = new SourceJob("htt://www.google.com");
+        let job = new SourceJob("https://www.google.com");
         console.log(job);
       } catch (error) {
         //do something with error (ideally log)
