@@ -81,6 +81,7 @@ export class SourceJob {
   constructor(url: string) {
     this._id = uuid();
     this._status = JobStatus.PENDING;
+    this._type = JobType.UNKNOWN;
     this._url = url;
   }
 
