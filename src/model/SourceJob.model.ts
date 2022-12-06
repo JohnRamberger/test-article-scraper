@@ -1,4 +1,5 @@
 import { v4 as uuid } from "uuid";
+import * as Log from "log";
 
 export enum JobStatus {
   PENDING = "PENDING",
@@ -78,7 +79,7 @@ export class SourceJob {
    * Creates a new SourceJob.
    * @param url The url of the source.
    */
-  constructor(url: string) {
+  constructor(url: string, type: JobType = JobType.UNKNOWN) {
     try {
       // verify the url is not null or empty
       if (!url || url.length === 0) {
@@ -91,8 +92,9 @@ export class SourceJob {
       // set the properties
       this._id = uuid();
       this._status = JobStatus.PENDING;
-      this._type = JobType.UNKNOWN;
+      this._type = type;
       this._url = url;
+      // Log.info(`SourceJob.constructor`, { job: this });
     } catch (error) {
       throw new Error(`SourceJob.constructor`, { cause: error });
     }
