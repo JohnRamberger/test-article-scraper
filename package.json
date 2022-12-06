@@ -27,9 +27,13 @@
   },
   "dependencies": {
     "@types/jsdom": "^20.0.1",
+    "@types/log": "^6.3.0",
     "@types/marked": "^4.0.7",
     "@types/uuid": "^8.3.4",
+    "error-cause": "^1.0.5",
     "jsdom": "^20.0.3",
+    "log": "^6.3.1",
+    "log-node": "^8.0.3",
     "marked": "^4.2.3",
     "node-cron": "^3.0.2",
     "node-html-markdown": "^1.2.2",
